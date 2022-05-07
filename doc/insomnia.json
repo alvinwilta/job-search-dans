@@ -1,0 +1,258 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-05-07T07:54:08.213Z",
+  "__export_source": "insomnia.desktop.app:v2022.3.0",
+  "resources": [
+    {
+      "_id": "req_fc9f86aaacf9453f83708e3b932cbdf1",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651903515533,
+      "created": 1651895021316,
+      "url": "{{ _.auth }}/login",
+      "name": "Login",
+      "description": "Simple login, use username and password\n\nReturns username and token",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "id": "pair_eacb200d3be94102a01c4ef5a07ac8ea",
+            "name": "username",
+            "value": "user",
+            "description": ""
+          },
+          {
+            "id": "pair_c1588526abd845c9b94a91459f71c345",
+            "name": "password",
+            "value": "password",
+            "description": ""
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "id": "pair_510efce846bf42b3b69901c180d16f9b"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1651903315638,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": false,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "parentId": null,
+      "modified": 1651894909558,
+      "created": 1651894909558,
+      "name": "dans-job-search",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_3b56f742bca946ddb155ea92eb35dbd3",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651903517052,
+      "created": 1651895027220,
+      "url": "{{ _.auth }}/register",
+      "name": "Register",
+      "description": "Simple register, provide username and password\n\nReturns mongodb id and username",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "id": "pair_ed3ec537247e42728d4a39d0617b8c7a",
+            "name": "username",
+            "value": "user",
+            "description": ""
+          },
+          {
+            "id": "pair_b462ba44d8bd4263a1e52e378694e007",
+            "name": "password",
+            "value": "password",
+            "description": ""
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "id": "pair_73448ecc62974223b2ee06158bb21cec"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1651903315613,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a74be736fd7f483084b07e155a196ac2",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651910036298,
+      "created": 1651901725069,
+      "url": "{{ _.jobs }}/",
+      "name": "Get all data",
+      "description": "Get all data based on certain parameters\n\n- description: job description based on search term\n- location: city name, zip code, etc\n- full_time: check job full time or not",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_676ad446c45e45eb9649797d76f65c51",
+          "name": "is_fulltime",
+          "value": "true",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_cca30670794c423cb542582dba95a955",
+          "name": "description",
+          "value": "SweetRush",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_bece3bbab77a4c7fb7dc7a109feac763",
+          "name": "location",
+          "value": "remote",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_499c8216f8f24edb8ddd327e52701bd7",
+          "name": "page",
+          "value": "1",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "disabled": false,
+        "token": "{% response 'body', 'req_fc9f86aaacf9453f83708e3b932cbdf1', 'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+      },
+      "metaSortKey": -1651901725069,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d169ad145ae149388bf6f11cca6fbb6f",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651910036786,
+      "created": 1651903315588,
+      "url": "{{ _.jobs }}/details/32bf67e5-4971-47ce-985c-44b6b3860cdb",
+      "name": "Get detail data",
+      "description": "Get single job detail based on id",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_fc9f86aaacf9453f83708e3b932cbdf1', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1651898373167.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eaaa6c654d604ac9adfccfeea22850c3",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651903545483,
+      "created": 1651901099416,
+      "url": "http://dev3.dansmultipro.co.id/api/recruitment/positions.json",
+      "name": "Fetch source data",
+      "description": "Fetch all data from origin server directly",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1651895021266,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_df53f0eee0e6ce42465ada980772f5356e0cabc7",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651894977415,
+      "created": 1651894909565,
+      "name": "Base Environment",
+      "data": { "host": "localhost:3000" },
+      "dataPropertyOrder": { "&": ["host"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1651894909565,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_df53f0eee0e6ce42465ada980772f5356e0cabc7",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651894909567,
+      "created": 1651894909567,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_2941d20110214c60bd0f72a4621b4d78",
+      "parentId": "wrk_d985bf4ef8d4440bb0276c8fdef06921",
+      "modified": 1651894909559,
+      "created": 1651894909559,
+      "fileName": "dans-job-search",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_16b42f352aad4b98bb16a2246d18208f",
+      "parentId": "env_df53f0eee0e6ce42465ada980772f5356e0cabc7",
+      "modified": 1651901843995,
+      "created": 1651894970509,
+      "name": "Default",
+      "data": { "auth": "{{ _.host }}/auth", "jobs": "{{ _.host }}/jobs" },
+      "dataPropertyOrder": { "&": ["auth", "jobs"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1651894970509,
+      "_type": "environment"
+    }
+  ]
+}

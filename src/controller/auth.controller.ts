@@ -13,21 +13,28 @@ import logger from "../utils/logger";
 
 const login: RequestHandler = async (req, res) => {
   try {
-    const akun = await findAccount({ username: req.body.username });
+    //* validate input
+    const username = req.body.username;
+    const password = req.body.password;
+    if (!(username && password))
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("username and/or password not provided!");
+
+    //* check existing account
+    const akun = await findAccount({ username: username });
     if (!akun) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ msg: "Account not found" });
     }
-    const password = req.body.password;
-    if (!password) throw Error("No password provided");
-    const isValid = await validatePassword(akun.username, req.body.password);
+    const isValid = await validatePassword(akun.username, password);
     if (!isValid) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ msg: "Password invalid!" });
     }
-    const token = await createAccessToken(req.body.username);
+    const token = await createAccessToken(username);
     return res
       .status(StatusCodes.OK)
       .send({ ...omit(akun, "password"), token: token });

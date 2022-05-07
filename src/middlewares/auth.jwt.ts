@@ -7,17 +7,29 @@ import logger from "../utils/logger";
 //* Middleware to verify whether the jwt is valid
 
 export const verifyToken: RequestHandler = (req, res, next) => {
-  const { authorization } = req.body.token || req.query.token || req.headers;
-  if (!authorization) {
-    return res.status(StatusCodes.FORBIDDEN).json({
-      msg: "No token provided",
-    });
-  }
   try {
+    let token;
+    if (req.body.token) {
+      token = req.body.token;
+    } else if (req.headers.authorization) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+
+    if (!token) {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        msg: "No token provided",
+      });
+    }
+    if (!authConfig.accessTokenSecret) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send("Secret not provided");
+    }
     jwt.verify(
-      authorization,
-      authConfig.accessTokenSecret,
+      token,
+      authConfig.accessTokenSecret!,
       (err: any, decoded: any) => {
+        logger.error(err);
         if (err) {
           return res.status(StatusCodes.UNAUTHORIZED).json({
             msg: "Invalid authorization",

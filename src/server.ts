@@ -13,7 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(StatusCodes.OK).send("API Running");
+  res
+    .status(StatusCodes.OK)
+    .send(
+      'API Running, see documentation on <a href="https://dans-search-alvin-doc.herokuapp.com" target="_blank">https://dans-search-alvin-doc.herokuapp.com<a>'
+    );
 });
 
 // Setup routes

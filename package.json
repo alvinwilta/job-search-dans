@@ -4,7 +4,6 @@
   "description": "",
   "scripts": {
     "start": "npx serve ./doc",
-    "build": "npx rimraf ./build && npx tsc",
     "start:dev": "nodemon src/server.ts",
     "test": "npx mocha --reporter spec -r ts-node/register src/tests/*.test.ts"
   },

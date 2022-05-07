@@ -29,8 +29,8 @@ export const verifyToken: RequestHandler = (req, res, next) => {
       token,
       authConfig.accessTokenSecret!,
       (err: any, decoded: any) => {
-        logger.error(err);
         if (err) {
+          logger.error(err.message);
           return res.status(StatusCodes.UNAUTHORIZED).json({
             msg: "Invalid authorization",
           });
@@ -43,7 +43,7 @@ export const verifyToken: RequestHandler = (req, res, next) => {
     if (err.name !== "JsonWebTokenError") {
       logger.error(err);
     } else {
-      logger.error("Invalid token", err);
+      logger.error("Invalid token", err.message);
     }
   }
 };

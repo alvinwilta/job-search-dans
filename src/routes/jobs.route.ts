@@ -2,8 +2,9 @@ import { Router } from "express";
 import { getPosition } from "../controller/jobs.controller";
 import { verifyToken } from "../middlewares/auth.jwt";
 
-const ticketRoute = Router();
+const jobRoute = Router();
 
-ticketRoute.get("/", verifyToken, getPosition);
+jobRoute.get("/", verifyToken, getPosition);
+jobRoute.get("/detail");
 
-export default ticketRoute;
+export default jobRoute;

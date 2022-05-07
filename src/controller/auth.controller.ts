@@ -50,7 +50,7 @@ export const register: RequestHandler = async (req, res) => {
     const user = await createAccount(req.body);
     return res.status(StatusCodes.OK).send(omit(user?.toJSON(), "password"));
   } catch (err: any) {
-    logger.error(err);
+    logger.error(err.message);
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "Register error", err: err.message });

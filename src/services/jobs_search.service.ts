@@ -43,3 +43,16 @@ export async function findDataSearchParameter(query: JobQuery) {
     throw err;
   }
 }
+
+export async function findOneData(id: string) {
+  try {
+    const data: Jobs[] = await getDataFromDans();
+    const job = data.find((job) => {
+      return job.id == id;
+    });
+    if (job) return job;
+    throw Error("Id not found");
+  } catch (err: any) {
+    throw err;
+  }
+}

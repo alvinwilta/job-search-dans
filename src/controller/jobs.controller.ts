@@ -1,15 +1,18 @@
 import { RequestHandler } from "express";
 import logger from "../utils/logger";
-import { findDataSearchParameter } from "../services/jobs_search.service";
+import {
+  findDataSearchParameter,
+  findOneData,
+} from "../services/jobs_search.service";
 import { StatusCodes } from "http-status-codes";
 import ftstatus from "../constants/fulltime";
 import { parseInt } from "lodash";
 
 //* Basic document creation and checking with MongoDB
 
-export const getPosition: RequestHandler = async (req, res) => {
+export const getJobs: RequestHandler = async (req, res) => {
   try {
-    logger.info(`Fetching all data`);
+    logger.info("Searching jobs");
 
     //* Handling fulltime
     let fulltime = ftstatus.both;
@@ -34,7 +37,26 @@ export const getPosition: RequestHandler = async (req, res) => {
     logger.info(`Found ${tik.length} jobs matched`);
     return res.status(StatusCodes.OK).send(tik);
   } catch (err: any) {
-    logger.error(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: err });
+    logger.error(err.message);
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: err });
+  }
+};
+
+export const getOneJob: RequestHandler = async (req, res) => {
+  try {
+    const id = <string>req.params.id;
+    if (!id) {
+      throw Error("No id provided!");
+    }
+    logger.info(`Getting job detail for ${id}`);
+    const data = await findOneData(id);
+    if (data) {
+      return res.status(StatusCodes.OK).send(data);
+    } else {
+      throw Error("Id not found on database");
+    }
+  } catch (err: any) {
+    logger.error(err.message);
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: err });
   }
 };
